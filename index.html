@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Liens vers mes sites</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { height: 100%; font-family: 'Orbitron', sans-serif; color: #fff; overflow: hidden; background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); }
+
+    canvas { position: fixed; top: 0; left: 0; z-index: -1; }
+
+    .container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      animation: fadeIn 2s ease;
+    }
+
+    h1 {
+      font-size: 4rem;
+      margin-bottom: 15px;
+      color: #00f0ff;
+      text-shadow: 0 0 10px #00f0ff, 0 0 20px #00bcd4;
+    }
+
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 25px;
+      color: #ccc;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 28px;
+      background: linear-gradient(45deg, #00f0ff, #0088ff);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 8px;
+      box-shadow: 0 0 15px rgba(0, 240, 255, 0.6);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 25px rgba(0, 240, 255, 0.8);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translate(-50%, -60%); }
+      to { opacity: 1; transform: translate(-50%, -50%); }
+    }
+
+    footer {
+      position: absolute;
+      bottom: 15px;
+      width: 100%;
+      text-align: center;
+      color: #aaa;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="background"></canvas>
+
+<div class="container">
+  <h1>Liens vers mes sites</h1>
+  <p>Accédez facilement à mes plateformes et projets</p>
+  <a href="https://virusdevv.github.io/MultiStream/" class="btn">Virus MultiStream</a>
+</div>
+
+<footer>
+  © 2025 VirusDEV | Tous droits réservés
+</footer>
+
+<script>
+const canvas = document.getElementById('background');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+const particles = [];
+const numParticles = 120;
+
+for (let i = 0; i < numParticles; i++) {
+  particles.push({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    dx: (Math.random() - 0.5) * 2,
+    dy: (Math.random() - 0.5) * 2,
+    radius: Math.random() * 2 + 1
+  });
+}
+
+function connectParticles() {
+  for (let i = 0; i < particles.length; i++) {
+    for (let j = i + 1; j < particles.length; j++) {
+      const dx = particles[i].x - particles[j].x;
+      const dy = particles[i].y - particles[j].y;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+      if (distance < 100) {
+        ctx.strokeStyle = 'rgba(0, 240, 255, 0.1)';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(particles[i].x, particles[i].y);
+        ctx.lineTo(particles[j].x, particles[j].y);
+        ctx.stroke();
+      }
+    }
+  }
+}
+
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  for (let p of particles) {
+    p.x += p.dx;
+    p.y += p.dy;
+
+    if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
+    if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+    ctx.fillStyle = '#00f0ff';
+    ctx.fill();
+  }
+
+  connectParticles();
+  requestAnimationFrame(animate);
+}
+
+animate();
+window.addEventListener('resize', () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+});
+</script>
+
+</body>
+</html>
