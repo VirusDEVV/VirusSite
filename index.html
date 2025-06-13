@@ -49,6 +49,26 @@
       box-shadow: 0 0 25px rgba(0, 240, 255, 0.8);
     }
 
+    .redirect-btn {
+      display: inline-block;
+      padding: 14px 28px;
+      background: linear-gradient(90deg, #00c6ff, #0072ff);
+      color: #fff;
+      text-decoration: none;
+      border: none;
+      border-radius: 12px;
+      box-shadow: 0 0 16px #00c6ff77;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      margin-top: 20px;
+      font-size: 1.3rem;
+    }
+
+    .redirect-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 24px #00c6ffbb;
+    }
+
     @keyframes fadeIn {
       from { opacity: 0; transform: translate(-50%, -60%); }
       to { opacity: 1; transform: translate(-50%, -50%); }
@@ -72,6 +92,9 @@
   <h1>Liens vers mes sites</h1>
   <p>Accédez facilement à mes plateformes et projets</p>
   <a href="https://virusdevv.github.io/MultiStream/" class="btn">Virus MultiStream</a>
+  <button class="redirect-btn" onclick="window.location.href='https://virusdevv.github.io/Dashboard/'">
+    DashBoard Personel
+  </button>
 </div>
 
 <footer>
